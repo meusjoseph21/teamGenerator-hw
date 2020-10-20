@@ -10,10 +10,10 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const employees = []
+const employees = [] //empty array to fill with employees
 
-function mainFunc(){
-    promptManager()
+function mainFunc(){ //this gets called at the bottom
+    promptManager() //calls manager function 
     function promptManager(){
         return inquirer.prompt([
             {
@@ -40,11 +40,11 @@ function mainFunc(){
             console.log(response)
             const manager = new Manager (response.managerName, response.managerID, response.managerEmail, response.managerOffice)
             employees.push(manager)
-            continueQuestions()
+            continueQuestions() //at the end of manager function calls next questions
         })
     }
 
-    function continueQuestions(){
+    function continueQuestions(){ //this will continuously be called by the Engineer and Intern functions. using the default it will create HTML when finished entering
         return inquirer.prompt({
             type: "list",
             message: "What type of Employee is next?",
@@ -62,7 +62,7 @@ function mainFunc(){
         })
     }
 
-    function promptEngineer(){
+    function promptEngineer(){ //engineer questions
         return inquirer.prompt([
             {
                 type: "input",
@@ -96,7 +96,7 @@ function mainFunc(){
         })
     }
 
-    function promptIntern(){
+    function promptIntern(){ //intern questions
         return inquirer.prompt([
             {
                 type: "input",
@@ -130,7 +130,7 @@ function mainFunc(){
         })
     }
 
-    function makeHTML(){
+    function makeHTML(){ //builds the html from the default response in continueQuestions
         const html = render(employees)
         fs.writeFile(outputPath, html, function(err){
             if (err) {
