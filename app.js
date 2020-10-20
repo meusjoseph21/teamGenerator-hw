@@ -10,8 +10,65 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const employees = []
+
+function mainFunc(){
+    promptManager()
+    function promptManager(){
+        return inquirer.prompt([
+            {
+                type: "input",
+                message: "What is your name?",
+                name: "managerName"
+            },
+            {
+                type: "input",
+                message: "What is your ID?",
+                name: "managerID"
+            },
+            {
+                type: "input",
+                message: "What is your email address?",
+                name: "managerEmail"
+            },
+            {
+                type: "input",
+                message: "What is your office number?",
+                name: "managerOffice"
+            },
+        ]).then(function (response){
+            console.log(response)
+            const manager = new Manager (response.managerName, response.managerID, response.managerEmail, response.managerOffice)
+            employees.push(manager)
+            continueQuestions()
+        })
+    }
+
+    function continueQuestions(){
+        return inquirer.prompt({
+            type: "list",
+            message: "What type of Employee is next?",
+            name: "employeeType",
+            choices: ["Engineer", "Intern", "Done"]
+        }).then(function (response){
+            console.log(response)
+            switch(response.newEmployee){
+                case "Engineer" : promptEngineer()
+                break
+                case "Intern": promptIntern()
+                break
+                default: makeHTML()
+            }
+        })
+    }
+}
+
+mainFunc()
+
+
 
 // Write code to use inquirer to gather information about the development team members,
+
 
 
 
