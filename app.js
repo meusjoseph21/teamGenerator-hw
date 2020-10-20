@@ -132,7 +132,7 @@ function mainFunc(){
 
     function makeHTML(){
         const html = render(employees)
-        fs.writeFile("team.html", html, function(err){
+        fs.writeFile(outputPath, html, function(err){
             if (err) {
                 console.log (err)
             }
