@@ -52,13 +52,81 @@ function mainFunc(){
             choices: ["Engineer", "Intern", "Done"]
         }).then(function (response){
             console.log(response)
-            switch(response.newEmployee){
+            switch(response.employeeType){
                 case "Engineer" : promptEngineer()
-                break
+                    break
                 case "Intern": promptIntern()
-                break
+                    break
                 default: makeHTML()
             }
+        })
+    }
+
+    function promptEngineer(){
+        return inquirer.prompt([
+            {
+                type: "input",
+                message: "What is your name?",
+                name: "engineerName"
+            },
+            {
+                type: "input",
+                message: "What is your ID?",
+                name: "engineerID"
+            },
+            {
+                type: "input",
+                message: "What is your email address?",
+                name: "engineerEmail"
+            },
+            {
+                type: "input",
+                message: "What is your github Username?",
+                name: "engineerGithub"
+            },
+        ]).then(function (response){
+            console.log(response)
+
+            const engineer = new Engineer(response.engineerName, response.engineerID, response.engineerEmail, response.engineerGithub)
+
+            employees.push(engineer)
+
+            continueQuestions()
+
+        })
+    }
+
+    function promptEngineer(){
+        return inquirer.prompt([
+            {
+                type: "input",
+                message: "What is your name?",
+                name: "engineerName"
+            },
+            {
+                type: "input",
+                message: "What is your ID?",
+                name: "engineerID"
+            },
+            {
+                type: "input",
+                message: "What is your email address?",
+                name: "engineerEmail"
+            },
+            {
+                type: "input",
+                message: "What is your github Username?",
+                name: "engineerGithub"
+            },
+        ]).then(function (response){
+            console.log(response)
+
+            const engineer = new Engineer(response.engineerName, response.engineerID, response.engineerEmail, response.engineerGithub)
+
+            employees.push(engineer)
+
+            continueQuestions()
+
         })
     }
 }
