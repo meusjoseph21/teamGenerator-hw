@@ -96,37 +96,46 @@ function mainFunc(){
         })
     }
 
-    function promptEngineer(){
+    function promptIntern(){
         return inquirer.prompt([
             {
                 type: "input",
                 message: "What is your name?",
-                name: "engineerName"
+                name: "internName"
             },
             {
                 type: "input",
                 message: "What is your ID?",
-                name: "engineerID"
+                name: "internID"
             },
             {
                 type: "input",
                 message: "What is your email address?",
-                name: "engineerEmail"
+                name: "internEmail"
             },
             {
                 type: "input",
-                message: "What is your github Username?",
-                name: "engineerGithub"
+                message: "What school did you attend?",
+                name: "internSchool"
             },
         ]).then(function (response){
             console.log(response)
 
-            const engineer = new Engineer(response.engineerName, response.engineerID, response.engineerEmail, response.engineerGithub)
+            const intern = new Intern(response.internName, response.internID, response.internEmail, response.internSchool)
 
-            employees.push(engineer)
+            employees.push(intern)
 
             continueQuestions()
 
+        })
+    }
+
+    function makeHTML(){
+        const html = render(employees)
+        fs.writeFile("team.html", html, function(err){
+            if (err) {
+                console.log (err)
+            }
         })
     }
 }
