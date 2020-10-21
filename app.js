@@ -132,7 +132,7 @@ function mainFunc(){ //this gets called at the bottom
 
     function makeHTML(){ //builds the html from the default response in continueQuestions
         const html = render(employees)
-        fs.writeFile(outputPath, html, function(err){
+        fs.writeFile("sample.html", html, function(err){
             if (err) {
                 console.log (err)
             }
